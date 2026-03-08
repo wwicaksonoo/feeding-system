@@ -1,9 +1,7 @@
 export async function GET() {
+    console.log("ESP32 connected!");
 
-  console.log("ESP32 connected!");
-
-  return Response.json({
-    message: "Hello ESP32"
-  });
-
-} 
+    return Response.json({
+        message: "Hello ESP32",
+    });
+}
