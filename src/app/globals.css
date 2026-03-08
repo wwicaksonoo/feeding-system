@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes fishMove {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(13px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-fish {
+  animation: fishMove 3s ease-in-out infinite;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
