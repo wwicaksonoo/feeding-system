@@ -10,22 +10,23 @@ export default function Home() {
   const [isOffline, setIsOffline] = useState(false);
   const [isAuto, setIsAuto] = useState(true); 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/sensor");
-        const json = await res.json();
-        
-        if (json.status === "offline") {
-          setIsOffline(true);
-        } else {
-          setData(json);
-          setIsOffline(false);
-        }
-      } catch (err) {
-        setIsOffline(true);
-      }
-    };
+ useEffect(() => {
+    const fetchData = async () => {
+      try {
+       
+        const res = await fetch("/api/sensor"); 
+        const json = await res.json();
+        
+        if (json.status === "offline") {
+          setIsOffline(true);
+        } else {
+          setData(json);
+          setIsOffline(false);
+        }
+      } catch (err) {
+        setIsOffline(true);
+      }
+    };
 
     fetchData(); 
     const interval = setInterval(fetchData, 5000);
@@ -37,8 +38,8 @@ export default function Home() {
       <div className="flex flex-col">
         <div className="flex justify-between">
           <div className="flex flex-col items-start rounded-lg p-8 text-white ">
-            <span className="text-xs opacity-50 uppercase tracking-widest">Live Monitoring</span>
-            <h1 className="font-bold text-3xl">Fish Aquarium</h1>
+            <span className="text-xs opacity-50 uppercase tracking-widest">Live</span>
+            <h1 className="font-bold text-3xl">Feeding System</h1>
             <span className="text-[10px] opacity-50 uppercase">Monitoring and Control System</span>
           </div>
 
@@ -49,13 +50,13 @@ export default function Home() {
 
         <div className="p-8">
     
-          <Stats 
-            level={data.water} 
-            temp={data.temp} 
-            isOffline={isOffline} 
-            isAuto={isAuto}
-            setIsAuto={setIsAuto} 
-          />
+<Stats 
+level={data.water} 
+        temp={data.temp} 
+        isOffline={isOffline} 
+        isAuto={isAuto} 
+        setIsAuto={setIsAuto} 
+      />
         </div>
         <FeedSchedule isAuto={isAuto} />
       </div>

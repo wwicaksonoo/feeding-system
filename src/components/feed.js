@@ -38,14 +38,15 @@ export default function FeedSchedule({isAuto}) {
                 item.time === currentTime
             );
 
-        
             if (isTimetoFeed && lastFed !== currentTime) {
-                setLastFed(currentTime); // Kunci menit ini
+                setLastFed(currentTime); 
                 try { 
-                    await fetch("/api/feed"); 
+                    await fetch("/api/feed", {
+                        method: "POST"
+                    }); 
                     console.log("Auto Feed Success at: " + currentTime);
                 } catch (err) { 
-                    console.error(err); 
+                    console.error("Auto Feed Error:", err); 
                 }
             }
         };

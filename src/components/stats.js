@@ -1,7 +1,7 @@
 "use client";
 
 export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
-   
+    
     const radius = 70;
     const circumference = Math.PI * radius;
     const progress = circumference - (level / 100) * circumference;
@@ -10,7 +10,9 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
         if (isAuto) return;
         console.log("Tombol FEED ditekan!"); 
         try {
-            const res = await fetch("/api/feed");
+            const res = await fetch("/api/feed", {
+                method: "POST",
+            });
             const data = await res.json();
             console.log("Respon dari ESP:", data);
         } catch (err) {
@@ -40,8 +42,7 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                     </div>
                 </div>
 
-               
-             <div 
+               <div 
                     onClick={() => setIsAuto(!isAuto)}
                     className="w-45 min-h-2 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] cursor-pointer hover:border-cyan-500/50 transition-all group"
                 >
@@ -63,7 +64,6 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                 </div>
             </div>
 
-          
             <div className="w-55 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] flex flex-col items-center">
                 <p className="text-xs tracking-widest text-gray-400 uppercase font-bold self-start">Ketinggian Air</p>
                 <div className="flex justify-center mt-6 relative">
