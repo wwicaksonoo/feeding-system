@@ -9,7 +9,6 @@ export default function Clock({ isOffline }) {
         const interval = setInterval(() => {
             setTime(new Date());
         }, 1000);
-
         return () => clearInterval(interval);
     }, []);
 
@@ -23,20 +22,30 @@ export default function Clock({ isOffline }) {
     const m = String(time.getMinutes()).padStart(2, "0");
     const s = String(time.getSeconds()).padStart(2, "0");
 
-    const clock = `${h}:${m}:${s}`;
-
     return (
-        <div className="py-2 relative right-5">
-<div className={`w-24 h-6 rounded bg-linear-to-b from-[#0b1b2b] to-[#081423] border shadow-[0_0_25px_rgba(0,200,255,0.08)] relative bottom-4 transition-all duration-300 flex items-center justify-center ${
-                isOffline ? "border-red-500 text-red-500 shadow-red-500/20" : "border-[#1c3a52] text-green-400"
+   
+        <div className="flex flex-col items-end">
+            
+          
+            <div className={`px-3 py-1 rounded-md bg-[#081423] border transition-all duration-300 flex items-center justify-center mb-2 ${
+                isOffline 
+                ? "border-red-500 text-red-500" 
+                : "border-cyan-500/30 text-green-400"
             }`}>
-                <span className="text-[10px] font-bold tracking-widest uppercase">
+                <span className="text-[8px] font-black tracking-[0.2em] uppercase">
                     {isOffline ? "Offline" : "Connected"}
                 </span>
             </div>
 
-            <div className="text-md font-semibold tabular-nums text-right">{clock}</div>
-            <div className="text-[12px] opacity-50 text-right">{date}</div>
+            
+            <div className="text-right">
+                <div className="text-md font-bold tabular-nums text-white leading-none">
+                    {h}:{m}:{s}
+                </div>
+                <div className="text-[10px] uppercase tracking-widest opacity-40 text-gray-300 mt-2">
+                    {date}
+                </div>
+            </div>
         </div>
     );
 }

@@ -16,13 +16,12 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
     };
 
     return (
-        /* Gunakan mx-auto untuk center, hapus 'bottom-6' yang bikin floating */
-        <div className="flex gap-4 w-full max-w-[420px] mx-auto overflow-hidden">
+      
+        <div className="flex gap-4 w-full max-w-105 mx-auto overflow-hidden">
             
-            {/* KOLOM KIRI: Suhu & Mode */}
             <div className="flex flex-col gap-4 w-[40%]">
                 
-                {/* Card Suhu */}
+            
                 <div className="p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-lg">
                     <p className="text-[10px] text-gray-400 tracking-widest uppercase font-bold whitespace-nowrap">Suhu Air</p>
                     <div className="text-4xl font-bold text-white mt-2">
@@ -38,7 +37,6 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                     </div>
                 </div>
 
-                {/* Card Mode */}
                 <div 
                     onClick={() => setIsAuto(!isAuto)}
                     className="p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] cursor-pointer hover:border-cyan-500/50 transition-all group"
@@ -61,7 +59,6 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                 </div>
             </div>
 
-            {/* KOLOM KANAN: Ketinggian Air */}
             <div className="w-[60%] p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] flex flex-col items-center justify-between">
                 <p className="text-[10px] tracking-widest text-gray-400 uppercase font-bold self-start">Ketinggian</p>
                 
