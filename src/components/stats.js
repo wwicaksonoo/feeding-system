@@ -22,20 +22,32 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
             <div className="flex flex-col gap-4 w-[40%]">
                 
             
-                <div className="p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-lg">
-                    <p className="text-[10px] text-gray-400 tracking-widest uppercase font-bold whitespace-nowrap">Suhu Air</p>
-                    <div className="text-4xl font-bold text-white mt-2">
-                        {isOffline ? "--" : temp}<span className="text-lg ml-0.5 opacity-50">°C</span>
-                    </div>
-                    <div className={`mt-4 inline-flex items-center gap-2 px-2 py-1 rounded-full border text-[9px] tracking-tighter transition-all ${
-                        isOffline ? "border-red-500 text-red-500" : 
-                        temp < 24 ? "border-blue-500 text-blue-400" : 
-                        temp <= 29 ? "border-cyan-500 text-white" : "border-red-500 text-red-400"
-                    }`}>
-                        <span className={`w-1 h-1 rounded-full ${isOffline ? "bg-red-500" : "bg-cyan-400 animate-pulse"}`}></span>
-                        <span className="whitespace-nowrap">{isOffline ? "OFFLINE" : temp < 24 ? "DINGIN" : temp <= 29 ? "NORMAL" : "PANAS"}</span>
-                    </div>
-                </div>
+<div className="p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-lg">
+    <p className="text-[10px] text-gray-400 tracking-widest uppercase font-bold whitespace-nowrap">Suhu Air</p>
+    
+    <div className="text-4xl font-bold text-white mt-2">
+        {isOffline ? "--" : Number(temp).toFixed(1)}
+        <span className="text-lg ml-1 opacity-50">°C</span>
+    </div>
+
+    <div className={`mt-4 inline-flex items-center gap-2 px-2 py-1 rounded-full border text-[9px] tracking-tighter transition-all ${
+        isOffline ? "border-red-500 text-red-500" : 
+        temp < 25 ? "border-blue-500 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : 
+        temp <= 38 ? "border-cyan-500 text-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.2)]" : 
+        "border-red-600 text-red-500 shadow-[0_0_10px_rgba(220,38,38,0.2)]"
+    }`}>
+        <span className={`w-1 h-1 rounded-full ${
+            isOffline ? "bg-red-500" : 
+            temp < 25 ? "bg-blue-500" : 
+            temp <= 38 ? "bg-cyan-400 animate-pulse" : 
+            "bg-red-600 animate-ping"
+        }`}></span>
+        
+        <span className="whitespace-nowrap font-bold">
+            {isOffline ? "OFFLINE" : temp < 25 ? "DINGIN" : temp <= 38 ? "NORMAL" : "PANAS"}
+        </span>
+    </div>
+</div>
 
                 <div 
                     onClick={() => setIsAuto(!isAuto)}
@@ -46,7 +58,7 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                         <div className={`text-xl font-bold ${isAuto ? "text-green-500" : "text-blue-400"}`}>
                             {isAuto ? "AUTO" : "MANUAL"}
                         </div>
-                        <div className={`w-2 h-2 rounded-full ${isAuto ? "bg-green-400 animate-pulse" : "bg-blue-400"}`}></div>
+                        <div className={`w-2 h-2 rounded-full ${isAuto ? "bg-green-400 animate-pulse" : "bg-transparent"}`}></div>
                     </div>
                     {!isAuto && (
                         <button 

@@ -80,7 +80,7 @@ export default function FeedSchedule({isAuto}) {
                         <p className="text-[10px] text-gray-400 tracking-widest uppercase font-bold">Jadwal Pakan</p>
                         <h2 className="text-xl text-white font-semibold tracking-tight">Jam Pemberian</h2>
                     </div>
-                    <div className="text-3xl animate-bounce">🐟</div>
+                    <div className="text-3xl animate-bounce">🐟 </div>
                 </div>
 
                 <div className="space-y-4">
