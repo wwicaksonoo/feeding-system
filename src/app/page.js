@@ -39,7 +39,7 @@ export default function Home() {
         <div className="flex justify-between">
           <div className="flex flex-col items-start rounded-lg p-8 text-white ">
             <span className="text-xs opacity-50 uppercase tracking-widest">Live</span>
-            <h1 className="font-bold text-3xl">Feeding System</h1>
+            <h1 className="font-bold text-2xl">Feeding System</h1>
             <span className="text-[10px] opacity-50 uppercase">Monitoring and Control System</span>
           </div>
 

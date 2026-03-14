@@ -22,20 +22,20 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
 
     return (
         <div className="flex gap-5 relative bottom-6">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 relative right-2">
                 
-                <div className="w-45 h-40 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)]">
-                    <p className="text-xs text-gray-400 tracking-widest uppercase font-bold">Suhu Air</p>
-                    <div className="text-5xl font-bold text-white mt-3">
+                <div className="w-35 h-40 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)]">
+                    <p className="text-xs text-gray-400 tracking-widest uppercase font-bold relative right-2">Suhu Air</p>
+                    <div className="text-5xl font-bold text-white mt-3 relative right-2">
                         {isOffline ? "--" : temp}<span className="text-lg ml-1 opacity-50">°C</span>
                     </div>
-                    <div className={`mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[10px] tracking-widest transition-all duration-300 ${
+                    <div className={`mt-4 inline-flex relative right-2 items-center gap-2 px-3 py-1 rounded-full border text-[10px] tracking-widest transition-all duration-300 ${
                         isOffline ? "border-red-500 text-red-500 shadow-[0_0_10px_rgba(239,68,68,0.2)]" : 
                         temp < 24 ? "border-blue-500 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : 
                         temp <= 29 ? "border-cyan-500 text-white shadow-[0_0_10px_rgba(34,211,238,0.2)]" : 
                         "border-red-500 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.2)]"
                     }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${
+                        <span className={`w-1.5 h-1.5 rounded-full  ${
                             isOffline ? "bg-red-500" : temp < 24 ? "bg-blue-500" : temp <= 29 ? "bg-cyan-400 animate-pulse" : "bg-red-500 animate-ping"
                         }`}></span>
                         {isOffline ? "OFFLINE" : temp < 24 ? "DINGIN" : temp <= 29 ? "NORMAL" : "PANAS"}
@@ -44,11 +44,11 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
 
                <div 
                     onClick={() => setIsAuto(!isAuto)}
-                    className="w-45 min-h-2 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] cursor-pointer hover:border-cyan-500/50 transition-all group"
+                    className="w-35 min-h-2 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] cursor-pointer hover:border-cyan-500/50 transition-all group"
                 >
-                    <p className="text-xs text-gray-400 tracking-widest relative bottom-3 uppercase">Mode</p>
-                    <div className="flex items-center justify-between relative bottom-1">
-                        <div className={`text-2xl font-semibold transition-colors ${isAuto ? "text-green-500" : "text-blue-400"}`}>
+                    <p className="text-xs text-gray-400 tracking-widest relative bottom-2 right-2 uppercase">Mode</p>
+                    <div className="flex items-center justify-between relative top-1">
+                        <div className={`text-2xl font-bold relative right-2 transition-colors ${isAuto ? "text-green-500" : "text-blue-400"}`}>
                             {isAuto ? "AUTO" : "MANUAL"}
                         </div>
                         <div className={`w-2 h-2 rounded-full ${isAuto ? "bg-green-400 animate-pulse" : "bg-blue-400"}`}></div>
@@ -64,7 +64,7 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                 </div>
             </div>
 
-            <div className="w-55 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] flex flex-col items-center">
+            <div className="w-50 p-6 rounded-3xl relative right-1 bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] flex flex-col items-center">
                 <p className="text-xs tracking-widest text-gray-400 uppercase font-bold self-start">Ketinggian Air</p>
                 <div className="flex justify-center mt-6 relative">
                     <svg width="180" height="110">

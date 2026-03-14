@@ -73,7 +73,7 @@ export default function FeedSchedule({isAuto}) {
     };
 
     return (
-        <div className="bg-[#071826] flex items-center justify-center p-4 relative bottom-10">
+        <div className="bg-[#0f0931] flex items-center justify-center p-6 relative bottom-12">
             <div className="w-105 p-8 rounded-3xl border border-white/10 bg-linear-to-b from-[#0b1b2b] to-[#081423] shadow-2xl">
                 <div className="flex justify-between items-center mb-6">
                     <div>
