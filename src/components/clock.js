@@ -26,7 +26,7 @@ export default function Clock({ isOffline }) {
     const clock = `${h}:${m}:${s}`;
 
     return (
-        <div className="py-2 ">
+        <div className="py-2 relative right-5">
 <div className={`w-24 h-6 rounded bg-linear-to-b from-[#0b1b2b] to-[#081423] border shadow-[0_0_25px_rgba(0,200,255,0.08)] relative bottom-4 transition-all duration-300 flex items-center justify-center ${
                 isOffline ? "border-red-500 text-red-500 shadow-red-500/20" : "border-[#1c3a52] text-green-400"
             }`}>
