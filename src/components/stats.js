@@ -1,54 +1,51 @@
 "use client";
 
 export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
-    
     const radius = 70;
     const circumference = Math.PI * radius;
     const progress = circumference - (level / 100) * circumference;
 
     const handleManualFeed = async () => {
         if (isAuto) return;
-        console.log("Tombol FEED ditekan!"); 
         try {
-            const res = await fetch("/api/feed", {
-                method: "POST",
-            });
+            const res = await fetch("/api/feed", { method: "POST" });
             const data = await res.json();
-            console.log("Respon dari ESP:", data);
         } catch (err) {
-            console.error("Gagal fetch ke /api/feed:", err);
+            console.error("Error:", err);
         }
     };
 
     return (
-        <div className="flex gap-7 relative bottom-6">
-            <div className="flex flex-col gap-5 relative right-2">
+        /* Gunakan mx-auto untuk center, hapus 'bottom-6' yang bikin floating */
+        <div className="flex gap-4 w-full max-w-[420px] mx-auto overflow-hidden">
+            
+            {/* KOLOM KIRI: Suhu & Mode */}
+            <div className="flex flex-col gap-4 w-[40%]">
                 
-                <div className="w-33 h-40 p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)]">
-                    <p className="text-xs text-gray-400 tracking-widest uppercase font-bold relative right-2">Suhu Air</p>
-                    <div className="text-5xl font-bold text-white mt-3 relative right-2">
-                        {isOffline ? "--" : temp}<span className="text-lg ml-1 opacity-50">°C</span>
+                {/* Card Suhu */}
+                <div className="p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-lg">
+                    <p className="text-[10px] text-gray-400 tracking-widest uppercase font-bold whitespace-nowrap">Suhu Air</p>
+                    <div className="text-4xl font-bold text-white mt-2">
+                        {isOffline ? "--" : temp}<span className="text-lg ml-0.5 opacity-50">°C</span>
                     </div>
-                    <div className={`mt-4 inline-flex relative right-2 items-center gap-2 px-3 py-1 rounded-full border text-[10px] tracking-widest transition-all duration-300 ${
-                        isOffline ? "border-red-500 text-red-500 shadow-[0_0_10px_rgba(239,68,68,0.2)]" : 
-                        temp < 24 ? "border-blue-500 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]" : 
-                        temp <= 29 ? "border-cyan-500 text-white shadow-[0_0_10px_rgba(34,211,238,0.2)]" : 
-                        "border-red-500 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+                    <div className={`mt-4 inline-flex items-center gap-2 px-2 py-1 rounded-full border text-[9px] tracking-tighter transition-all ${
+                        isOffline ? "border-red-500 text-red-500" : 
+                        temp < 24 ? "border-blue-500 text-blue-400" : 
+                        temp <= 29 ? "border-cyan-500 text-white" : "border-red-500 text-red-400"
                     }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full  ${
-                            isOffline ? "bg-red-500" : temp < 24 ? "bg-blue-500" : temp <= 29 ? "bg-cyan-400 animate-pulse" : "bg-red-500 animate-ping"
-                        }`}></span>
-                        {isOffline ? "OFFLINE" : temp < 24 ? "DINGIN" : temp <= 29 ? "NORMAL" : "PANAS"}
+                        <span className={`w-1 h-1 rounded-full ${isOffline ? "bg-red-500" : "bg-cyan-400 animate-pulse"}`}></span>
+                        <span className="whitespace-nowrap">{isOffline ? "OFFLINE" : temp < 24 ? "DINGIN" : temp <= 29 ? "NORMAL" : "PANAS"}</span>
                     </div>
                 </div>
 
-               <div 
+                {/* Card Mode */}
+                <div 
                     onClick={() => setIsAuto(!isAuto)}
-                    className="w-33  p-6 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] cursor-pointer hover:border-cyan-500/50 transition-all group"
+                    className="p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] cursor-pointer hover:border-cyan-500/50 transition-all group"
                 >
-                    <p className="text-xs text-gray-400 tracking-widest relative bottom-2 right-2 uppercase">Mode</p>
-                    <div className="flex items-center justify-between relative top-1">
-                        <div className={`text-2xl font-bold relative right-2 transition-colors ${isAuto ? "text-green-500" : "text-blue-400"}`}>
+                    <p className="text-[10px] text-gray-400 tracking-widest uppercase font-bold mb-2">Mode</p>
+                    <div className="flex items-center justify-between">
+                        <div className={`text-xl font-bold ${isAuto ? "text-green-500" : "text-blue-400"}`}>
                             {isAuto ? "AUTO" : "MANUAL"}
                         </div>
                         <div className={`w-2 h-2 rounded-full ${isAuto ? "bg-green-400 animate-pulse" : "bg-blue-400"}`}></div>
@@ -56,18 +53,20 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                     {!isAuto && (
                         <button 
                             onClick={(e) => { e.stopPropagation(); handleManualFeed(); }}
-                            className="mt-4 w-full py-2 bg-orange-500/10 border border-blue-500/50 text-blue-400 text-[10px] font-bold tracking-widest rounded-xl hover:border-blue-900 hover:text-white transition-all active:scale-95"
+                            className="mt-3 w-full py-2 bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[9px] font-bold rounded-xl hover:bg-blue-500 hover:text-white transition-all"
                         >
-                            BERI PAKAN
+                            FEED
                         </button>
                     )}
                 </div>
             </div>
 
-            <div className="w-50 p-6 rounded-3xl relative right-6 bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] shadow-[0_0_25px_rgba(0,200,255,0.08)] flex flex-col items-center">
-                <p className="text-xs tracking-widest text-gray-400 uppercase font-bold self-start">Ketinggian Air</p>
-                <div className="flex justify-center mt-6 relative">
-                    <svg width="180" height="110">
+            {/* KOLOM KANAN: Ketinggian Air */}
+            <div className="w-[60%] p-5 rounded-3xl bg-linear-to-b from-[#0b1b2b] to-[#081423] border border-[#1c3a52] flex flex-col items-center justify-between">
+                <p className="text-[10px] tracking-widest text-gray-400 uppercase font-bold self-start">Ketinggian</p>
+                
+                <div className="flex justify-center mt-4 relative">
+                    <svg width="150" height="90" viewBox="0 0 180 110">
                         <path d="M20 90 A70 70 0 0 1 160 90" stroke="#0f3a4f" strokeWidth="14" fill="none" strokeLinecap="round" />
                         <path 
                             d="M20 90 A70 70 0 0 1 160 90" 
@@ -78,16 +77,13 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                             style={{ transition: "stroke-dashoffset 0.8s ease" }} 
                         />
                     </svg>
-                    <div className="absolute bottom-0 text-white font-black text-2xl font-mono">{isOffline ? "--" : `${level}%`}</div>
+                    <div className="absolute bottom-1 text-white font-black text-xl">{isOffline ? "--" : `${level}%`}</div>
                 </div>
-                <div className="w-full flex justify-between text-[10px] text-gray-500 mt-2 font-bold px-2">
-                    <span>0%</span>
-                    <span>100%</span>
-                </div>
-                <div className={`mt-6 w-full text-center py-2 rounded-xl border text-[10px] tracking-widest font-black transition-all ${
-                    isOffline ? "border-red-500 text-red-500" : level > 90 ? "border-orange-500 text-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.2)]" : "border-cyan-500 text-cyan-400"
+
+                <div className={`mt-4 w-full text-center py-2 rounded-xl border text-[9px] tracking-widest font-black ${
+                    isOffline ? "border-red-500 text-red-500" : level > 90 ? "border-orange-500 text-orange-400" : "border-cyan-500 text-cyan-400"
                 }`}>
-                    {isOffline ? "SENSOR OFFLINE" : level > 90 ? "TANGKI PENUH" : "KONDISI NORMAL"}
+                    {isOffline ? "OFFLINE" : level > 90 ? "FULL" : "NORMAL"}
                 </div>
             </div>
         </div>

@@ -37,7 +37,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#0f0931] ">
       <div className="flex flex-col">
         <div className="flex justify-between">
-          <div className="flex flex-col rounded-lg p-8 text-white ">
+          <div className="flex flex-col rounded-lg p-8 text-white relative right-1">
             <span className="text-xs opacity-50 uppercase tracking-widest">Live</span>
             <h1 className="font-bold text-2xl whitespace-nowrap">Feeding System</h1>
             <span className="text-[10px] opacity-50 uppercase">Monitoring and Control System</span>
