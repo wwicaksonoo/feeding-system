@@ -61,12 +61,17 @@ export default function Stats({ level, temp, isOffline, isAuto, setIsAuto }) {
                         <div className={`w-2 h-2 rounded-full ${isAuto ? "bg-green-400 animate-pulse" : "bg-transparent"}`}></div>
                     </div>
                     {!isAuto && (
-                        <button 
-                            onClick={(e) => { e.stopPropagation(); handleManualFeed(); }}
-                            className="mt-3 w-full py-2 bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[9px] font-bold rounded-xl hover:bg-blue-500 hover:text-white transition-all"
-                        >
-                            FEED
-                        </button>
+<button
+    onClick={(e) => {
+        e.stopPropagation();
+        handleManualFeed();
+    }}
+    className="mt-3 w-full py-2 bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[9px] font-bold rounded-xl 
+    hover:bg-blue-500 hover:text-white transition-all duration-200
+    active:scale-95 active:translate-x-[7px] active:shadow-inner"
+>
+    FEED
+</button>
                     )}
                 </div>
             </div>

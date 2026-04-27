@@ -2,7 +2,7 @@ import { db } from "@/lib/firebase";
 import { ref, get } from "firebase/database";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic"; // Paksa jangan pake cache
+export const dynamic = "force-dynamic"; 
 
 export async function GET() {
   try {
