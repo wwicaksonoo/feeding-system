@@ -8,6 +8,7 @@ export default function Home() {
   const [data, setData] = useState({ water: 0, temp: 0 });
   const [isOffline, setIsOffline] = useState(false);
   const [isAuto, setIsAuto] = useState(true); 
+  const [isPumpOn, setIsPumpOn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +60,8 @@ export default function Home() {
             isOffline={isOffline} 
             isAuto={isAuto} 
             setIsAuto={setIsAuto} 
+            isPumpOn={isPumpOn} 
+            setIsPumpOn={setIsPumpOn} 
           />
           
           
